@@ -14,7 +14,7 @@ class Customer extends Authenticatable implements JWTSubject
     use HasFactory;
     use HasApiTokens, HasFactory, Notifiable;
     protected $table = "customer";
-    protected $fillable  = ["fullname", "email", "phone", 'address', "password", "createDay", "status", "member_id"];
+    protected $fillable  = ["fullname", "email", "phone", 'address', "password", "createDay", 'image', "status", "member_id"];
     protected $hidden = ['password'];
     public $timestamps = false;
     protected $primaryKey = 'ID';

@@ -78,9 +78,11 @@ class AuthController extends Controller
 
         try {
             if (!Auth::user()->token)
-                return response()->json(
-                    auth('api')->user()
-                );
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'get profile',
+                    'data' => auth('api')->user()
+                ]);
         } catch (Exception $exception) {
             return response()->json(['status' => "faild", 'message' => $exception, 'data' => '[]'], 500);
         }

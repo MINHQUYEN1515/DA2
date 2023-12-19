@@ -5,6 +5,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Admin\Auth\AuthController;
+use App\Http\Controllers\Data\Product\ProductController as ProductProductController;
+use PHPUnit\Framework\Attributes\Group;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -26,4 +29,7 @@ Route::prefix("/Auth")->controller(AuthController::class)->group(function () {
     Route::post("login", "Login");
     Route::post('logout', 'logout');
     Route::get('profile', 'getProfile');
+});
+Route::prefix('/product')->controller(ProductProductController::class)->group(function () {
+    Route::get('getAll', 'getAll');
 });
