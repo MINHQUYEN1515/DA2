@@ -21,6 +21,7 @@ class AuthController extends Controller
     {
     }
 
+
     public function Signup(CustomerRequest $request)
     {
         try {
@@ -62,7 +63,6 @@ class AuthController extends Controller
         if (!$token = auth()->attempt($credentials)) {
             return response()->json(['status' => "faild", 'message' => 'Unauthorized', 'data' => '[]'], 401);
         }
-
         return $this->respondWithToken($token);
     }
     protected function respondWithToken($token)
@@ -111,5 +111,28 @@ class AuthController extends Controller
                 'message' => trans('auth.token.missing')
             ], 500);
         }
+    }
+    public function changePassword(Request $request)
+    {
+        $request->validate([
+            'password_old' => 'required|min:8',
+            'password_new' => 'required|min:8'
+        ]);
+        if (!Hash::check($request->password_old, auth()->user()->password)) {
+            return response()->json([
+                'status' => "faild",
+                'message' => "wrong password ",
+                'data' => []
+            ]);
+        }
+
+        Customer::find(auth()->user()->ID)->update([
+            'password' => bcrypt($request->password_new)
+        ]);
+        return response()->json([
+            'status' => "success",
+            'message' => 'update password successlly! ',
+            'data' => auth()->user()
+        ]);
     }
 }
