@@ -135,4 +135,14 @@ class AuthController extends Controller
             'data' => auth()->user()
         ]);
     }
+    public function uploadImageProfile(Request $request)
+    {
+        $request->validate([
+            'file' => "required|max:2048|mimes:jpeg,png,jpg,gif|image"
+        ]);
+        $image = $request->file('file');
+        $filename = time() . '-' . $image->getClientOriginalName();
+
+        $image->move("image/customer", $filename);
+    }
 }
