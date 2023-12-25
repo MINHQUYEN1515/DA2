@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
 
 class Category extends Model
 {
@@ -13,8 +13,12 @@ class Category extends Model
     protected $fillable = ['name'];
     public $timestamps = false;
     protected $primaryKey = 'ID';
-    public function products(): BelongsToMany
+    public function products()
     {
-        return $this->BelongsToMany(Product::class);
+        return $this->hasMany(Product::class, 'category_id');
+    }
+    public function product()
+    {
+        return $this->hasMany(Product::class, 'category_id')->paginate(5);
     }
 }

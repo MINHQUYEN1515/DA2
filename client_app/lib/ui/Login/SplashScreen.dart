@@ -1,4 +1,6 @@
+import 'package:client_app/router/AppRouter.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -44,7 +46,9 @@ class SplashScreen extends StatelessWidget {
                         horizontal: 100, vertical: 15),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15))),
-                onPressed: () {},
+                onPressed: () {
+                  Get.toNamed(AppRouter.login);
+                },
                 child: Text("Go to shop"))),
       ]),
     );

@@ -1,16 +1,27 @@
-import 'package:client_app/ui/HomeApp/MainApp_page.dart';
+import 'package:client_app/router/AppRouter.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: AppHome(),
+        body: _body(),
       ),
     );
   }
+}
+
+Widget _body() {
+  return GetMaterialApp(
+    theme: ThemeData(
+      primarySwatch: Colors.blue,
+    ),
+    initialRoute: AppRouter.splash,
+    getPages: AppRouter.getPage,
+  );
 }

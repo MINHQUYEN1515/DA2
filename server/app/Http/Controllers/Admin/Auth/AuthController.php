@@ -70,7 +70,7 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => JWTFactory::getTTL() * 60
+            'expires_in' => JWTFactory::getTTL() * 7
         ]);
     }
     public function getProfile()
